@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import "./App.css";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -17,28 +17,32 @@ import { updateUser } from "./redux/AuthSlice";
 export default function App() {
   const user = useSelector((state) => state.Auth.user);
   const disptch = useDispatch();
+  // console.log(`User role: ${user.role}`)
 
   // const navigate = useNavigate();
 
   useEffect(() => {
     disptch(updateUser());
-  }, [user]);
+  }, []);
 
   return (
     <>
       <BrowserRouter>
         <Toaster />
         <Routes>
-          <Route path="/" element={<UserLayout />}>
+          {/* <Route path="/" element={<UserLayout />}>
             <Route index element={<Home />} />
+          </Route> */}
+          <Route path="/" element={<Home/>}>
+
           </Route>
           <Route path="/admin" element={<AdminLaouts />}>
             <Route index element={<Admin />} />
           </Route>
-          <Route path="/" element={<PublicLayouts />}>
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-          </Route>
+          {/* <Route path="/" element={<PublicLayouts />}> */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          {/* </Route> */}
         </Routes>
       </BrowserRouter>
     </>

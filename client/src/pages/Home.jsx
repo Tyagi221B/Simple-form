@@ -1,9 +1,8 @@
-import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { post } from "../services/ApiEndpoint";
 import { Logout } from "../redux/AuthSlice";
-// import SimpleForm from "./form";
+import { Form } from "./Form";
 
 export default function Home() {
   const user = useSelector((state) => state.Auth.user);
@@ -16,7 +15,6 @@ export default function Home() {
   const handleLogout = async () => {
     try {
       const request = await post("/api/auth/logout");
-      const resspone = request.data;
       if (request.status == 200) {
         disptach(Logout());
         navigate("/login");
@@ -30,7 +28,7 @@ export default function Home() {
       <div className="home-container">
         <div className="user-card">
           <h2> Welcome,{user && user.name}</h2>
-          {/* <SimpleForm/> */}
+          <Form/>
           <button className="logout-btn" onClick={handleLogout}>
             Logout
           </button>

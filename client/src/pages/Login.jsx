@@ -7,7 +7,7 @@ import { SetUser } from "../redux/AuthSlice";
 
 export default function Login() {
   const user = useSelector((state) => state.Auth);
-  console.log(user);
+  // console.log(user);
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(email, password);
+    // console.log(email, password);
     try {
       const request = await post("/api/auth/login", { email, password });
       const reponse = request.data;
@@ -29,7 +29,7 @@ export default function Login() {
         toast.success(reponse.message);
         dispatch(SetUser(reponse.user));
       }
-      console.log(reponse);
+      // console.log(reponse);
     } catch (error) {
       console.log(error);
     }

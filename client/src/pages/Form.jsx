@@ -1,19 +1,30 @@
-// src/SimpleForm.js
-import React, { useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-const SimpleForm = () => {
+export const Form = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const user = useSelector((state) => state.Auth.user);
+
 
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log('Title:', title);
-    console.log('Description:', description);
-    navigate("/login")
+    if (!user) {
+      console.log(user)
+      toast("Please login First");
+      navigate('/login');
+      return;
+    }
+    else{
+      console.log("user is present")
+      // Handle form submission logic here
+    }
+
+    
   };
 
   return (
@@ -39,5 +50,3 @@ const SimpleForm = () => {
     </form>
   );
 };
-
-export default SimpleForm;

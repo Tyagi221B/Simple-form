@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { post } from "../services/ApiEndpoint";
 import { toast } from "react-hot-toast";
@@ -10,7 +10,6 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("user");
 
-  console.log(name, email, password, role);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,11 +20,11 @@ export default function Register() {
         password,
         role
       });
-      const reposne = request.data;
+      const response = request.data;
       if (request.status == 200) {
-        toast.success(reposne.message);
+        toast.success(response.message);
       }
-      console.log(reposne);
+      else(toast.error(response.message));
     } catch (error) {
       console.log(error);
     }
